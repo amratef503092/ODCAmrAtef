@@ -156,7 +156,11 @@ class LoginScreen extends StatelessWidget {
 
                                             alert(context: context,text: cubit.loginModel!.message.toString());
                                           }
-                                        });
+                                        }).catchError((error){
+                                         offLoading(context);
+
+                                         alert(context: context,text: cubit.loginModel!.message.toString());
+                                       });
                                         offLoading(context);
                                       }
 

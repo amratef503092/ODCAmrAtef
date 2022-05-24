@@ -8,6 +8,7 @@ import 'package:odc/controller/web_service/api.dart';
 import 'package:odc/view/constant/getCacheData.dart';
 import '../../../../model/categories.dart';
 import '../../../../model/course_model.dart';
+import '../../../../model/get_categories_id_Model.dart';
 import '../../../../view/screens/homeScreen/module/main_page.dart';
 import '../../../../view/screens/homeScreen/module/my_course.dart';
 import '../../../../view/screens/homeScreen/module/my_profile.dart';
@@ -19,6 +20,7 @@ class HomePageCubit extends Cubit<HomePageState> {
   int defaultIndex =0;
   Categories ?allCategory;
   AllCourses ? allCourses;
+  GetCategoryId ? getCategoryId;
   List<Widget>screen = [
     MainPage(),
     const MyCourse(),
@@ -57,6 +59,20 @@ class HomePageCubit extends Cubit<HomePageState> {
       print(error);
       emit(GetCategoriesError());
 
+    });
+  }
+  Future<void> getAllCategoryId({required String token ,required int id ,
+
+  }) async{
+    await DioHelper.getData(
+      token: token,
+      //   query: {
+      //   'categoryId' :1,
+      // },
+        code:'categories/$id/courses'
+    ).then((value) {
+      getCategoryId = GetCategoryId.fromJson(value!.data);
+      print(getCategoryId!.data!.courses![0].courseName);
     });
   }
 }

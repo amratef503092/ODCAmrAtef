@@ -120,31 +120,38 @@ class MainPage extends StatelessWidget {
               builder: (context, state) {
                 var cubit = HomePageCubit.get(context);
                 return cubit.allCategory != null
-                    ? SizedBox(
-                        height: height * .2,
-                        child: ListView.separated(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) {
-                              return CategoriesDesign(
-                                title: cubit
-                                    .allCategory?.data![index].categoryName
-                                    .toString(),
-                                imagePath: cubit
-                                    .allCategory!.data![index].imageUrl
-                                    .toString(),
-                              );
-                            },
-                            separatorBuilder: (context, index) {
-                              return const SizedBox(
-                                width: 12,
-                              );
-                            },
-                            itemCount: HomePageCubit.get(context)
-                                .allCategory!
-                                .data!
-                                .length),
-                      )
+                    ? Padding(
+                      padding: const EdgeInsets.all(AppPadding.p8),
+                      child: SizedBox(
+                          height: height * .2,
+                          child: ListView.separated(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return CategoriesDesign(
+                                  function: (){
+                                    cubit.getAllCategoryId(token: GetCacheData().token,
+                                        id: cubit.allCategory!.data![index].id!.toInt()).then((value) {
+                                      Navigator.pushNamed(context,Routes.specificCategory);
+
+                                    });
+                                  },
+                                  title: cubit
+                                      .allCategory?.data![index].categoryName
+                                      .toString(),
+                                  imagePath: cubit
+                                      .allCategory!.data![index].imageUrl
+                                      .toString(),
+                                );
+                              },
+                              separatorBuilder: (context, index) {
+                                return  SizedBox(
+                                  width: width*0.16,
+                                );
+                              },
+                              itemCount: 3),
+                        ),
+                    )
                     : Center(child: CircularProgressIndicator.adaptive());
               },
             ),
@@ -170,6 +177,7 @@ class MainPage extends StatelessWidget {
                                   admin:cubit.allCourses!.data![index].admin?.adminName ,
                                   category:cubit.allCourses!.data![index].category?.categoryName ,
                                   hours: '14',
+                                  image: cubit.allCourses!.data![index].image_url,
                                   width: width, height: height);
                             },
                             separatorBuilder: (context, index) {
@@ -177,10 +185,7 @@ class MainPage extends StatelessWidget {
                                 width: 12,
                               );
                             },
-                            itemCount: HomePageCubit.get(context)
-                                .allCategory!
-                                .data!
-                                .length),
+                            itemCount:3),
                       )
                     : const Center(child: CircularProgressIndicator.adaptive());
               },
@@ -219,86 +224,3 @@ class MainPage extends StatelessWidget {
   }
 }
 
-class NewCourseDesign extends StatelessWidget {
-  String? image;
-  String? title;
-  String? category;
-  String? admin;
-  String? hours;
-  final double width;
-  final double height;
-  NewCourseDesign({
-    Key? key,
-    required this.width,
-    required this.height,
-    this.image =
-        'https://www.ngmisr.com/wp-content/uploads/2021/11/istockphoto-1208175333-612x612-7.jpg',
-    required this.category,
-    required this.title,
-    required this.hours,
-    required this.admin,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: width * .5,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child:  Image(
-              image: NetworkImage(image!),
-            ),
-          ),
-          SizedBox(
-            height: height * 0.01,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: AppPadding.p8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  category!,
-                  style: getSemiBoldStyle(color: ColorManager.primary),
-                  textAlign: TextAlign.start,
-                ),
-                SizedBox(
-                  height: height * 0.01,
-                ),
-                SizedBox(
-                  width: width * .4,
-                  child: Text(
-                    title!,
-                    style: getBoldStyle(
-                        color: ColorManager.headTextColor,
-                        fontSize: AppSize.s18),
-                  ),
-                ),
-                SizedBox(
-                  height: height * 0.01,
-                ),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: width * .45,
-                      child: Text(
-                        "$admin . $hours Hours",
-                        style: getBoldStyle(color: ColorManager.textAdminColor),
-                      ),
-                    )
-                  ],
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: height * 0.01,
-          ),
-        ],
-      ),
-    );
-  }
-}

@@ -41,6 +41,7 @@ class Data {
   String? createdAt;
   Category? category;
   Admin? admin;
+  String?image_url;
 
   Data(
       {id,
@@ -54,7 +55,9 @@ class Data {
         finalProject,
         createdAt,
         category,
-        admin});
+        admin,
+        image_url
+      });
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -67,6 +70,7 @@ class Data {
     exam3 = json['exam3'];
     finalProject = json['finalProject'];
     createdAt = json['createdAt'];
+    image_url = json['image_url'];
     category = json['Category'] != null
         ?  Category.fromJson(json['Category'])
         : null;
@@ -83,6 +87,7 @@ class Data {
     data['exam1'] = exam1;
     data['exam2'] = exam2;
     data['exam3'] = exam3;
+    data['image_url'] = image_url;
     data['finalProject'] = finalProject;
     data['createdAt'] = createdAt;
     if (category != null) {

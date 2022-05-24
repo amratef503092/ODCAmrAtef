@@ -7,6 +7,7 @@ import 'package:odc/controller/shared/bloc/cubit_login/login_cubit.dart';
 import 'package:odc/controller/shared/bloc/cubit_onBoarding_screen/on_boarding_cubit.dart';
 import 'package:odc/controller/shared/bloc/cubit_regiser/register_cubit.dart';
 import 'package:odc/controller/web_service/end_point.dart';
+import 'package:odc/view/constant/getCacheData.dart';
 import 'package:odc/view/resource/color_manager.dart';
 import 'package:odc/view/resource/route_manager.dart';
 import 'package:odc/view/resource/theme_manager.dart';
@@ -58,7 +59,7 @@ class MyApp extends StatelessWidget {
           ),
 
           BlocProvider<HomePageCubit>(
-            create: (BuildContext context) =>   HomePageCubit()..getAllCategory()..getAllCourses(),
+            create: (BuildContext context) =>   HomePageCubit()..getAllCategory()..getAllCourses()
 
           ),
           // BlocProvider<ForgetPasswordCubit>(

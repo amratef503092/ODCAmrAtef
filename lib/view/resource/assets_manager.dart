@@ -1,5 +1,7 @@
 const String imagePath = "assets/images";
 class ImageAssets{
+  static const String defaultImage = "$imagePath/home.svg";
+
   static const String onBoardingLogo1 = "$imagePath/hello.svg";
   static const String onBoardingLogo2 = "$imagePath/illustrations.svg";
   static const String onBoardingLogo3 = "$imagePath/illustrations (1).svg";

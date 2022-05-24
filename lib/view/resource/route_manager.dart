@@ -10,6 +10,7 @@ import '../screens/forgetPassword/forget_password.dart';
 import '../screens/forgetPassword/verify_your_email.dart';
 import '../screens/homeScreen/categories.dart';
 import '../screens/homeScreen/layout/homeScreen.dart';
+import '../screens/homeScreen/specific _category.dart';
 import '../screens/login_screen.dart';
 import '../screens/register_screen.dart';
 import '../screens/onBoarding_screen.dart';
@@ -23,6 +24,7 @@ class Routes {
   static const String createNewPassword = "/createNewPassword";
   static const String homeScreen = "/HomeScreen";
   static const String seeAllPage = "/seeAll";
+  static const String specificCategory ='/SpecificCategory';
 }
 
 class RouteGenerator {
@@ -60,6 +62,13 @@ class RouteGenerator {
                 BlocProvider.value(
                   value: BlocProvider.of<HomePageCubit>(context)..getAllCategory()..getAllCourses(),
                   child: const seeAllPage(),
+                ));
+      case Routes.specificCategory:
+        return MaterialPageRoute(
+            builder: (context) =>
+                BlocProvider.value(
+                  value: BlocProvider.of<HomePageCubit>(context)..getAllCategory(),
+                  child: const SpecificCategory(),
                 ));
 
       default:

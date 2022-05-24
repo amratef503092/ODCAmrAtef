@@ -1,4 +1,4 @@
-const String baseUrl = "https://5742-196-205-94-85.eu.ngrok.io";
+const String baseUrl = "https://d67c-196-205-94-85.eu.ngrok.io";
 const String KEY = "/api/v1/";
 const String  LOGIN = 'login';
 const String REGISTER = 'register';
