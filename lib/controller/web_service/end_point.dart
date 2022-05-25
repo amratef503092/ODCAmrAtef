@@ -7,3 +7,4 @@ const String verifyOtp = 'verifyOtp';
 const String createNewPassword = 'resetPassword';
 const String courses = 'courses';
 const String categories = 'categories';
+const String profileEndPoint = 'me';

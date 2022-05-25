@@ -39,6 +39,8 @@ class TextManager{
   static const String enterCode = "Enter code";
   static const String newCourses = "New Courses";
   static const String categories = "Categories";
+  static const String myCourses = "My Courses";
+
 
 
 

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:odc/controller/shared/bloc/cubit_home_page/home_page_cubit.dart';
+import 'package:odc/controller/shared/bloc/cubit_profile/profile_cubit.dart';
 import 'package:odc/view/constant/design.dart';
+import 'package:odc/view/constant/getCacheData.dart';
 import 'package:odc/view/resource/assets_manager.dart';
 import 'package:odc/view/resource/color_manager.dart';
 import 'package:odc/view/resource/style_manager.dart';
@@ -15,6 +19,15 @@ class MyProfile extends StatelessWidget {
     var size = MediaQuery.of(context).size;
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+    return BlocConsumer<HomePageCubit, HomePageState>(
+  listener: (context, state) {
+    // TODO: implement listener
+  },
+  builder: (context, state) {
+
+    var cubit = HomePageCubit.get(context);
+
+
     return Scaffold(
       appBar: AppBar(
           titleSpacing: 0,
@@ -71,7 +84,7 @@ class MyProfile extends StatelessWidget {
                 height: height * .04,
               ),
               Text(
-                "Amr Atef",
+                cubit.profile!.data!.student!.studentName.toString(),
                 style: getBoldStyle(
                     color: ColorManager.headTextColor, fontSize: AppSize.s28),
               ),
@@ -80,13 +93,14 @@ class MyProfile extends StatelessWidget {
               ),
               Container(
                 padding: EdgeInsets.all(AppPadding.p14),
-                width: width * .4,
+                width: width * .5,
                 decoration: BoxDecoration(
                     color: ColorManager.profileEmailBackground,
                     borderRadius: BorderRadius.circular(AppSize.s12)),
                 child: Center(
                     child: Text(
-                  "amr.atef@gmail.com",
+                        cubit.profile!.data!.student!.email.toString(),
+
                   style: getBoldStyle(
                     color: ColorManager.disableTextColor,
                   ),
@@ -111,6 +125,8 @@ class MyProfile extends StatelessWidget {
         ),
       ),
     );
+  },
+);
   }
 }
 

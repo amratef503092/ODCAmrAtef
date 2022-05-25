@@ -157,7 +157,7 @@ class MainPage extends StatelessWidget {
             ),
             buildTwoTextWitheSpace(
                 function: () {
-                  // Navigator.pushNamed(context, Routes.seeAllPage);
+                  Navigator.pushNamed(context, Routes.seeAllCourses);
                 },
                 textOne: TextManager.newCourses,
                 textTwo: TextManager.seeAll),
@@ -178,7 +178,9 @@ class MainPage extends StatelessWidget {
                                   category:cubit.allCourses!.data![index].category?.categoryName ,
                                   hours: '14',
                                   image: cubit.allCourses!.data![index].image_url,
-                                  width: width, height: height);
+                                  width: width, height: height, function: (){
+
+                              },);
                             },
                             separatorBuilder: (context, index) {
                               return const SizedBox(

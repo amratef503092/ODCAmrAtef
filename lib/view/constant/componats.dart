@@ -106,6 +106,7 @@ class NewCourseDesign extends StatelessWidget {
   String? hours;
   final double width;
   final double height;
+  final Function function;
 
   NewCourseDesign({
     Key? key,
@@ -117,73 +118,132 @@ class NewCourseDesign extends StatelessWidget {
     required this.title,
     required this.hours,
     required this.admin,
+    required this.function,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: width * .5,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+    return GestureDetector(
+      onTap: (){
+        function();
+      },
+      child: SizedBox(
+        width: width * .5,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
 
-          ClipRRect(
-            borderRadius: BorderRadius.circular(AppSize.s18),
-            child:  Image(
-                image: NetworkImage(image! ),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(AppSize.s18),
+              child:  Image(
+                  image: NetworkImage(image! ),
 
-                height: height*.2,
+                  height: height*.2,
 
-              ),
+                ),
 
-          ),
-          SizedBox(
-            height: height * 0.01,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: AppPadding.p8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  category!,
-                  style: getSemiBoldStyle(color: ColorManager.primary),
-                  textAlign: TextAlign.start,
-                ),
-                SizedBox(
-                  height: height * 0.01,
-                ),
-                SizedBox(
-                  width: width * .4,
-                  child: Text(
-                    title!,
-                    style: getBoldStyle(
-                        color: ColorManager.headTextColor,
-                        fontSize: AppSize.s18),
-                  ),
-                ),
-                SizedBox(
-                  height: height * 0.01,
-                ),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: width * .45,
-                      child: Text(
-                        "$admin . $hours Hours",
-                        style: getBoldStyle(color: ColorManager.textAdminColor),
-                      ),
-                    )
-                  ],
-                ),
-              ],
             ),
-          ),
-          SizedBox(
-            height: height * 0.01,
-          ),
-        ],
+            SizedBox(
+              height: height * 0.01,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: AppPadding.p8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    category!,
+                    style: getSemiBoldStyle(color: ColorManager.primary),
+                    textAlign: TextAlign.start,
+                  ),
+                  SizedBox(
+                    height: height * 0.01,
+                  ),
+                  SizedBox(
+                    width: width * .4,
+                    child: Text(
+                      title!,
+                      style: getBoldStyle(
+                          color: ColorManager.headTextColor,
+                          fontSize: AppSize.s18),
+                    ),
+                  ),
+                  SizedBox(
+                    height: height * 0.01,
+                  ),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: width * .45,
+                        child: Text(
+                          "$admin . $hours Hours",
+                          style: getBoldStyle(color: ColorManager.textAdminColor),
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: height * 0.01,
+            ),
+          ],
+        ),
       ),
     );
   }
 }
+GestureDetector builditemCategoryById(
+    {
+      required double width, required double height ,
+      required Function function,
+      required String image,
+      required String title,
+      required String admin
+    }) {
+  return GestureDetector(
+    onTap: (){},
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(AppSize.s18),
+          child:  Image(
+            image: NetworkImage(image ),
+            width: width*.4,
+          ),
+        ),
+        SizedBox(
+            width: width*.05
+        ),
+        SizedBox(
+          width: width * .45,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "${title} ",
+                style: getBoldStyle(color: ColorManager.headTextColor ,fontSize: AppSize.s18 ,
+
+                ),
+              ),
+              SizedBox(
+                  height: height*.02
+              ),
+              Text(
+                "${ admin} . 14 Hours",
+                style: getBoldStyle(color: ColorManager.textAdminColor),
+              ),
+            ],
+          ),
+        )
+
+
+      ],
+    ),
+  );
+}
+
+

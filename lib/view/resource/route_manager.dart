@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:odc/controller/shared/bloc/cubit_forget_password/forget_password_cubit.dart';
 import 'package:odc/controller/shared/bloc/cubit_login/login_cubit.dart';
+import 'package:odc/model/course_model.dart';
 import '../../controller/shared/bloc/cubit_home_page/home_page_cubit.dart';
 import '../../controller/shared/bloc/cubit_onBoarding_screen/on_boarding_cubit.dart';
 import '../../controller/shared/bloc/cubit_regiser/register_cubit.dart';
@@ -10,6 +11,7 @@ import '../screens/forgetPassword/forget_password.dart';
 import '../screens/forgetPassword/verify_your_email.dart';
 import '../screens/homeScreen/categories.dart';
 import '../screens/homeScreen/layout/homeScreen.dart';
+import '../screens/homeScreen/see_all_courses.dart';
 import '../screens/homeScreen/specific _category.dart';
 import '../screens/login_screen.dart';
 import '../screens/register_screen.dart';
@@ -25,6 +27,8 @@ class Routes {
   static const String homeScreen = "/HomeScreen";
   static const String seeAllPage = "/seeAll";
   static const String specificCategory ='/SpecificCategory';
+  static const String seeAllCourses ='/seeAllCourses';
+
 }
 
 class RouteGenerator {
@@ -69,6 +73,13 @@ class RouteGenerator {
                 BlocProvider.value(
                   value: BlocProvider.of<HomePageCubit>(context)..getAllCategory(),
                   child: const SpecificCategory(),
+                ));
+      case Routes.seeAllCourses:
+        return MaterialPageRoute(
+            builder: (context) =>
+                BlocProvider.value(
+                  value: BlocProvider.of<HomePageCubit>(context)..getAllCourses(),
+                  child:  SeeAllCourses(),
                 ));
 
       default:

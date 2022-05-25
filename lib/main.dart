@@ -14,6 +14,7 @@ import 'package:odc/view/resource/theme_manager.dart';
 import 'controller/shared/bloc/bloc_ob_server.dart';
 import 'controller/shared/bloc/cubit_forget_password/forget_password_cubit.dart';
 import 'controller/shared/bloc/cubit_home_page/home_page_cubit.dart';
+import 'controller/shared/bloc/cubit_profile/profile_cubit.dart';
 import 'controller/shared/shared_prefrance/sheard_perafrance.dart';
 import 'controller/web_service/api.dart';
 
@@ -59,9 +60,14 @@ class MyApp extends StatelessWidget {
           ),
 
           BlocProvider<HomePageCubit>(
-            create: (BuildContext context) =>   HomePageCubit()..getAllCategory()..getAllCourses()
+            create: (BuildContext context) =>   HomePageCubit()..getAllCategory()..getAllCourses()..getProfileData(GetCacheData().token)
 
           ),
+          BlocProvider<ProfileCubit>(
+              create: (BuildContext context) =>   ProfileCubit()..getProfileData(),
+
+          ),
+
           // BlocProvider<ForgetPasswordCubit>(
           //   create: (BuildContext context) => ForgetPasswordCubit(),
           //

@@ -35,10 +35,10 @@ class DioHelper {
 
   }
   static Future<Response?> getData(
-      {String ?code, Map <String,dynamic>?query, String token = ''}) async {
+      {String ?endPoint, Map <String,dynamic>?query, String token = ''}) async {
     try{
     Response response = await dio.get(
-        KEY+code!,
+        KEY+endPoint!,
         options: Options(
           headers: {
             'Accept': "application/json",

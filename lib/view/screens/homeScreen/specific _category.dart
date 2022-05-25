@@ -21,6 +21,7 @@ class SpecificCategory extends StatelessWidget {
     
     return BlocConsumer<HomePageCubit, HomePageState>(
   listener: (context, state) {
+
   },
   builder: (context, state) {
     var cubit = HomePageCubit.get(context);
