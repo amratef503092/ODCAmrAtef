@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:odc/view/resource/assets_manager.dart';
 import 'package:odc/view/resource/color_manager.dart';
@@ -45,7 +46,9 @@ class CourseDetails extends StatelessWidget {
                   SizedBox(
                     height: height*.01,
                   ),
-                  buildButton(width: width, height: height , function : (){}),
+                  buildButton(width: width, height: height , function : (){
+
+                  }),
                   SizedBox(
                     height: height*.01,
                   ),
@@ -69,7 +72,39 @@ class CourseDetails extends StatelessWidget {
 
                   Align(alignment: Alignment.topLeft,child:  Text(TextManager.youMayBeInterestedIn
                     , style: getSemiBoldStyle(color: ColorManager.black ,fontSize: AppSize.s18),)),
+                  Expanded(
+                    child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index){
 
+                      return GestureDetector(
+                        onTap: (){
+
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.all(AppPadding.p14),
+                          child: Row(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(AppPadding.p8),
+                                child: Image(image:
+                                  NetworkImage(
+                                      cubit.allCourses!.data![index].image_url.toString()
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: width*0.02,
+                              ),
+                              Text(  cubit.allCourses!.data![index].courseName.toString() ,style: getSemiBoldStyle(color: ColorManager.headTextColor),)
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                      itemCount: 3,
+                    ),
+                  )
 
 
 

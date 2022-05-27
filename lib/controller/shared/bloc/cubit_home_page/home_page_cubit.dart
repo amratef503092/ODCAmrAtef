@@ -12,6 +12,7 @@ import '../../../../model/course_model.dart';
 import '../../../../model/course_model_by_id.dart';
 import '../../../../model/get_categories_id_Model.dart';
 import '../../../../model/profile.dart';
+import '../../../../view/constant/componats.dart';
 import '../../../../view/resource/route_manager.dart';
 import '../../../../view/screens/homeScreen/module/main_page.dart';
 import '../../../../view/screens/homeScreen/module/my_course.dart';
@@ -145,7 +146,29 @@ class HomePageCubit extends Cubit<HomePageState> {
       });
     });
   }
+  void courseScreenDetails({
+  required BuildContext context,
+    required String  image,
+    required String title,
+    required String level,
+    required String subTitle,
+    required Function function
 
+}){
+    Navigator.pushNamed(context, Routes.couresdetails ,
+        arguments: CourseDetail(
+            function: (){
+              function();
+            },
+            image: image,
+            title: title,
+            location: 'cairo',
+            level: level,
+            subTitle: subTitle
+
+        )
+    );
+  }
 
 }
 

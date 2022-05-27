@@ -48,7 +48,15 @@ class MyCourse extends StatelessWidget {
                       width: width, height: height,
                       image: cubit.getEnrolled![index].data!.imageUrl.toString(),
                       title: cubit.getEnrolled![index].data!.courseName.toString(),
-                      function: (){},
+                      function: (){
+    cubit.courseScreenDetails(context: context,
+    image: cubit.getEnrolled![index].data!.imageUrl.toString(),
+    title:  cubit.getEnrolled![index].data!.courseName.toString(),
+    level:cubit.getEnrolled![index].data!.courseLevel.toString(),
+    subTitle:cubit.getEnrolled![index].data!.admin!.adminName.toString(),
+    function: (){});
+
+                      },
                       admin: cubit.getEnrolled![index].data!.admin!.adminName.toString() ,
                     );
                   },
@@ -78,7 +86,9 @@ class MyCourse extends StatelessWidget {
         required String admin
       }) {
     return GestureDetector(
-      onTap: (){},
+      onTap: (){
+        function()!;
+      },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

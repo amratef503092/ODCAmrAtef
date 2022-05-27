@@ -152,7 +152,7 @@ class MainPage extends StatelessWidget {
                               itemCount: 3),
                         ),
                     )
-                    : Center(child: CircularProgressIndicator.adaptive());
+                    : const Center(child: CircularProgressIndicator.adaptive());
               },
             ),
             buildTwoTextWitheSpace(
@@ -179,7 +179,23 @@ class MainPage extends StatelessWidget {
                                   hours: '14',
                                   image: cubit.allCourses!.data![index].image_url,
                                   width: width, height: height, function: (){
-
+                                cubit.courseScreenDetails(context: context,
+                                    image: cubit.allCourses!.data![index].image_url.toString(),
+                                    title: cubit.allCourses!.data![index].courseName.toString(),
+                                    level: cubit.allCourses!.data![index].courseLevel.toString(),
+                                    subTitle: cubit.allCourses!.data![index].admin!.adminName.toString(),
+                                    function: (){});
+                                // Navigator.pushNamed(context, Routes.couresdetails ,
+                                //     arguments: CourseDetail(
+                                //         function: (){},
+                                //         image: cubit.allCourses!.data![index].image_url,
+                                //         title: cubit.allCourses!.data![index].courseName,
+                                //         location: 'cairo',
+                                //         level: cubit.allCourses!.data![index].courseLevel,
+                                //         subTitle: cubit.allCourses!.data![index].admin?.adminName
+                                //
+                                //     )
+                                // );
                               },);
                             },
                             separatorBuilder: (context, index) {

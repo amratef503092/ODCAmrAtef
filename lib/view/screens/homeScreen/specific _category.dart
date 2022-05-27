@@ -5,6 +5,7 @@ import 'package:odc/view/constant/design.dart';
 
 import '../../constant/componats.dart';
 import '../../resource/color_manager.dart';
+import '../../resource/route_manager.dart';
 import '../../resource/style_manager.dart';
 import '../../resource/text_manager.dart';
 import '../../resource/value_manager.dart';
@@ -42,7 +43,14 @@ class SpecificCategory extends StatelessWidget {
                 width: width, height: height,
                 image: cubit.getCategoryId!.data!.courses![index].imageUrl.toString(),
                 title: cubit.getCategoryId!.data!.courses![index].courseName.toString(),
-                function: (){},
+                function: (){
+                  cubit.courseScreenDetails(context: context,
+                      image: cubit.getCategoryId!.data!.courses![index].imageUrl.toString(),
+                      title:  cubit.getCategoryId!.data!.courses![index].courseName.toString(),
+                      level:cubit.getCategoryId!.data!.courses![index].courseLevel.toString(),
+                      subTitle:cubit.getCategoryId!.data!.courses![index].admin!.adminName.toString(),
+                      function: (){});
+                },
                 admin: cubit.getCategoryId!.data!.courses![index].admin!.adminName.toString() ,
               );
             },
@@ -68,7 +76,9 @@ class SpecificCategory extends StatelessWidget {
         required String admin
       }) {
     return GestureDetector(
-            onTap: (){},
+            onTap: (){
+              function()!;
+            },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
