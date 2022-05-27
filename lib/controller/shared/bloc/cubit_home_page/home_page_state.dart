@@ -11,5 +11,9 @@ class GetCourseSuccessful extends HomePageState {}
 class GetCourseError extends HomePageState {}
 class GetProfileSuccessful extends HomePageState {}
 class GetProfileError extends HomePageState {}
+class LogOutSuccessful extends HomePageState {}
+class LogOutError extends HomePageState {}
+
+
 
 

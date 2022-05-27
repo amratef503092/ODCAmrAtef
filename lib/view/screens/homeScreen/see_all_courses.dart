@@ -5,6 +5,7 @@ import 'package:odc/view/constant/design.dart';
 
 import '../../constant/componats.dart';
 import '../../resource/color_manager.dart';
+import '../../resource/route_manager.dart';
 import '../../resource/style_manager.dart';
 import '../../resource/text_manager.dart';
 import '../../resource/value_manager.dart';
@@ -36,7 +37,7 @@ class SeeAllCourses extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               title: Text(
-                "amr",
+                 TextManager.newCourses,
                 style: getBoldStyle(color: Colors.black, fontSize: AppSize.s18),
               ),
             ),
@@ -52,7 +53,10 @@ class SeeAllCourses extends StatelessWidget {
                           .toString(),
                       title: cubit.allCourses!.data![index].courseName
                           .toString(),
-                      function: () {},
+                      function: () {
+                        Navigator.pushNamed(context, Routes.couresdetails);
+
+                      },
                       admin: cubit.allCourses!.data![index].admin!.adminName
                           .toString(),
                     );

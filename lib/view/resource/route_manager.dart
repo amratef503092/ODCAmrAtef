@@ -6,6 +6,7 @@ import 'package:odc/model/course_model.dart';
 import '../../controller/shared/bloc/cubit_home_page/home_page_cubit.dart';
 import '../../controller/shared/bloc/cubit_onBoarding_screen/on_boarding_cubit.dart';
 import '../../controller/shared/bloc/cubit_regiser/register_cubit.dart';
+import '../screens/course_details.dart';
 import '../screens/forgetPassword/create_new_password.dart';
 import '../screens/forgetPassword/forget_password.dart';
 import '../screens/forgetPassword/verify_your_email.dart';
@@ -28,6 +29,8 @@ class Routes {
   static const String seeAllPage = "/seeAll";
   static const String specificCategory ='/SpecificCategory';
   static const String seeAllCourses ='/seeAllCourses';
+  static const String couresdetails ='/coursedetails';
+
 
 }
 
@@ -80,6 +83,14 @@ class RouteGenerator {
                 BlocProvider.value(
                   value: BlocProvider.of<HomePageCubit>(context)..getAllCourses(),
                   child:  SeeAllCourses(),
+                ));
+
+      case Routes.couresdetails:
+        return MaterialPageRoute(
+            builder: (context) =>
+                BlocProvider.value(
+                  value: BlocProvider.of<HomePageCubit>(context)..getAllCourses(),
+                  child:  const CourseDetails(),
                 ));
 
       default:

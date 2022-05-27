@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:odc/controller/shared/bloc/cubit_home_page/home_page_cubit.dart';
 import 'package:odc/controller/shared/bloc/cubit_profile/profile_cubit.dart';
+import 'package:odc/controller/shared/shared_prefrance/sheard_perafrance.dart';
 import 'package:odc/view/constant/design.dart';
 import 'package:odc/view/constant/getCacheData.dart';
 import 'package:odc/view/resource/assets_manager.dart';
@@ -48,12 +49,17 @@ class MyProfile extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(right: AppSize.s18),
               child: IconButton(
-                onPressed: () {
+                onPressed: ()
+                {
+
                   alert(context: context, text: TextManager.textONAlertLogoOut ,
                   pathImage: ImageAssets.logoutAlert,
                     title: TextManager.logOut,
                     width: width*.4,
-                    hight: height*.02
+                    hight: height*.35,
+                    function: (){
+                    cubit.logOut(GetCacheData().token ,context);
+                    }
                   );
                 },
                 icon: SvgPicture.asset(

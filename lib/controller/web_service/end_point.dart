@@ -1,4 +1,4 @@
-const String baseUrl = "https://d67c-196-205-94-85.eu.ngrok.io";
+const String baseUrl = "https://3ca3-196-205-94-85.eu.ngrok.io";
 const String KEY = "/api/v1/";
 const String  LOGIN = 'login';
 const String REGISTER = 'register';
@@ -8,3 +8,4 @@ const String createNewPassword = 'resetPassword';
 const String courses = 'courses';
 const String categories = 'categories';
 const String profileEndPoint = 'me';
+const String logout = 'logout';

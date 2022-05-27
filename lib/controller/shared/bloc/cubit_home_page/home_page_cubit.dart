@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:flutter/material.dart';
+import 'package:odc/controller/shared/shared_prefrance/sheard_perafrance.dart';
 import 'package:odc/controller/web_service/api.dart';
 import 'package:odc/view/constant/getCacheData.dart';
 import '../../../../model/categories.dart';
@@ -11,6 +12,7 @@ import '../../../../model/course_model.dart';
 import '../../../../model/course_model_by_id.dart';
 import '../../../../model/get_categories_id_Model.dart';
 import '../../../../model/profile.dart';
+import '../../../../view/resource/route_manager.dart';
 import '../../../../view/screens/homeScreen/module/main_page.dart';
 import '../../../../view/screens/homeScreen/module/my_course.dart';
 import '../../../../view/screens/homeScreen/module/my_profile.dart';
@@ -122,6 +124,24 @@ class HomePageCubit extends Cubit<HomePageState> {
           emit(GetCourseError());
 
         });
+      });
+    });
+  }
+  Future<void>logOut(String token , BuildContext context) async{
+    await DioHelper.postData(
+      token: token,
+      endPoint: logout,
+    ).then((value)
+    {
+      CacheHelper.sharedPreferences!.remove('token').then((value) {
+        CacheHelper.sharedPreferences!.remove('refresh_token').then((value) {
+          print(value);
+          Navigator.pushReplacementNamed(context, Routes.loginRoute);
+          emit(LogOutSuccessful());
+        });
+      }).catchError((e){
+        emit(LogOutError());
+
       });
     });
   }

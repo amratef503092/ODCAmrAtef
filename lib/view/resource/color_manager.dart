@@ -4,6 +4,7 @@ class ColorManager {
 
   static const Color primary = Color(0xffFF6600);
   static const Color backGround = Color(0xffFFFFFF);
+  static const Color black = Colors.black;
 
   static const Color headTextColor = Color(0xff000000);
   static const Color captionTextColor = Color(0xff8F8F8F);

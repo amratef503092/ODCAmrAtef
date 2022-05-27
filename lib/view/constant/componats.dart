@@ -136,11 +136,11 @@ class NewCourseDesign extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(AppSize.s18),
               child:  Image(
-                  image: NetworkImage(image! ),
+                image: NetworkImage(image! ),
 
-                  height: height*.2,
+                height: height*.2,
 
-                ),
+              ),
 
             ),
             SizedBox(
@@ -203,7 +203,9 @@ GestureDetector builditemCategoryById(
       required String admin
     }) {
   return GestureDetector(
-    onTap: (){},
+    onTap: (){
+      function();
+    },
     child: Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [

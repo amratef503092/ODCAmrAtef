@@ -41,6 +41,7 @@ void alert(
     String? title,
     double ? width,
       double ?hight,
+      Function ? function
     }) {
   print(hight);
   showDialog<String>(
@@ -54,8 +55,9 @@ void alert(
               style: getSemiBoldStyle(color: ColorManager.headTextColor),
             )
           : SizedBox(
-              height: 250,
+              height: hight,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   SvgPicture.asset(pathImage),
 
@@ -70,14 +72,13 @@ void alert(
                           onPressed: () {
                             // Navigator.pushReplacementNamed(context, Routes.registerRoute);
                           }, child:  Text(TextManager.back),),
-                      SizedBox(
+                      const SizedBox(
                         width: 20,
                       ),
                       CustomButton(
                       withSize: width!.toDouble(),
-
                         function: () {
-                          // Navigator.pushReplacementNamed(context, Routes.loginRoute);
+                          function!();
                         },
 
                         text: TextManager.logOut,

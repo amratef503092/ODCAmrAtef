@@ -40,6 +40,9 @@ class TextManager{
   static const String newCourses = "New Courses";
   static const String categories = "Categories";
   static const String myCourses = "My Courses";
+  static const String startCourse = "Start Course";
+  static const String aboutThisCourse = "About this Course";
+  static const String youMayBeInterestedIn = "You may be interested in";
 
 
 
