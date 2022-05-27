@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:odc/view/resource/assets_manager.dart';
@@ -6,14 +7,24 @@ import 'package:odc/view/resource/style_manager.dart';
 import 'package:odc/view/resource/text_manager.dart';
 import 'package:odc/view/resource/value_manager.dart';
 
+import '../../controller/shared/bloc/cubit_home_page/home_page_cubit.dart';
+import '../constant/componats.dart';
+
 class CourseDetails extends StatelessWidget {
-  const CourseDetails({Key? key}) : super(key: key);
+
+    CourseDetails();
 
   @override
   Widget build(BuildContext context) {
+   final CourseDetail courseDetails= ModalRoute.of(context)?.settings.arguments as CourseDetail;
+
+    if (kDebugMode) {
+      print(courseDetails);
+    }
     var size = MediaQuery.of(context).size;
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+    var cubit = HomePageCubit.get(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: SafeArea(
@@ -25,11 +36,11 @@ class CourseDetails extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  imageDetailesScreen(context: context , height: height ,width: width),
+                  imageDetailesScreen(context: context , height: height ,width: width ,image: courseDetails.image),
                   SizedBox(
                     height: height*.01,
                   ),
-                 textDetailesScreen(title :  'Learn UI/UX for beginners', subTitle :'Author: Ahmed Abaza'
+                 textDetailesScreen(title :  courseDetails.title, subTitle : courseDetails.subTitle
                      ),
                   SizedBox(
                     height: height*.01,
@@ -48,7 +59,7 @@ class CourseDetails extends StatelessWidget {
 
                  ,style: getMediumStyle(color: ColorManager.black , fontSize: AppSize.s14), ),
                   textRowCourse(
-                    text: "Beginner Level",
+                    text: courseDetails.level,
                     pathSvg: ImageAssets.level
                   ),
                   textRowCourse(
@@ -58,6 +69,7 @@ class CourseDetails extends StatelessWidget {
 
                   Align(alignment: Alignment.topLeft,child:  Text(TextManager.youMayBeInterestedIn
                     , style: getSemiBoldStyle(color: ColorManager.black ,fontSize: AppSize.s18),)),
+
 
 
 
@@ -115,7 +127,7 @@ class CourseDetails extends StatelessWidget {
   }
 
   Stack imageDetailesScreen(
-      {required BuildContext context, double? height, double? width}) {
+      {required BuildContext context, double? height, double? width , String?image}) {
     return Stack(
                 children: [
 
@@ -123,7 +135,7 @@ class CourseDetails extends StatelessWidget {
                     borderRadius: BorderRadius.circular(AppSize.s18),
                     child:  Image(
                         image: NetworkImage(
-                            'https://thumbs.dreamstime.com/b/modern-computer-programming-code-screen-showing-random-scripts-113805394.jpg'),
+                    image!,),
                     width: width,
                     ),
                   ),

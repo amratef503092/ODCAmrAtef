@@ -82,16 +82,14 @@ class RouteGenerator {
             builder: (context) =>
                 BlocProvider.value(
                   value: BlocProvider.of<HomePageCubit>(context)..getAllCourses(),
-                  child:  SeeAllCourses(),
+                  child:  const SeeAllCourses(),
                 ));
 
       case Routes.couresdetails:
         return MaterialPageRoute(
+          settings: settings,
             builder: (context) =>
-                BlocProvider.value(
-                  value: BlocProvider.of<HomePageCubit>(context)..getAllCourses(),
-                  child:  const CourseDetails(),
-                ));
+                CourseDetails());
 
       default:
         return unDefinedRoute();

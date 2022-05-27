@@ -247,5 +247,21 @@ GestureDetector builditemCategoryById(
     ),
   );
 }
+class CourseDetail{
+  String ? image;
+  String ? title;
+  String ? subTitle;
+  Function ? function;
+  String ? level;
+  String ?location ;
 
+  CourseDetail({
+    this.image,
+    this.title,
+    this.subTitle,
+    this.function,
+    this.level,
+    this.location,
+  });
+}
 

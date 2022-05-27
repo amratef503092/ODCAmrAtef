@@ -20,6 +20,6 @@ class ImageAssets{
   static const String star = "$imagePath/Star.svg";
   static const String logoutAlert = "$imagePath/logoutAlert.svg";
   static const String rectangle = "$imagePath/Rectangle.svg";
-  static const String level = "$imagePath/level.svg";
+  static const String level = "$imagePath/Level.svg";
   static const String location = "$imagePath/map-pin.svg";
 }
