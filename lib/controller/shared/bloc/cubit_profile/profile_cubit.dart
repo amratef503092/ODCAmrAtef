@@ -22,6 +22,7 @@ class ProfileCubit extends Cubit<ProfileState> {
         endPoint:profileEndPoint
     ).then((value) {
       profile = Profile.fromJson(value!.data);
+      emit(ProfileSuccessful());
     });
   }
   Future<void> getAllCategoryId({required String token ,required int id ,

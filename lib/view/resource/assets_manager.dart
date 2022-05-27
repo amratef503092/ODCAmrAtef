@@ -22,4 +22,5 @@ class ImageAssets{
   static const String rectangle = "$imagePath/Rectangle.svg";
   static const String level = "$imagePath/Level.svg";
   static const String location = "$imagePath/map-pin.svg";
+  static const String stars = "$imagePath/stars.svg";
 }

@@ -178,7 +178,7 @@ class LoginScreen extends StatelessWidget {
 
 
                                       }
-                                    ,child: const Text("Click")),
+                                    ,child: const Text(TextManager.logIn)),
                                 Row(
                                   mainAxisAlignment:MainAxisAlignment.center,
                                   children: [

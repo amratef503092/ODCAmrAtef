@@ -68,8 +68,8 @@ class RouteGenerator {
             builder: (context) =>
                 BlocProvider.value(
                   value: BlocProvider.of<HomePageCubit>(context)..getAllCategory()..getAllCourses(),
-                  child: const seeAllPage(),
-                ));
+                  child: const seeAllPage(),),
+        );
       case Routes.specificCategory:
         return MaterialPageRoute(
             builder: (context) =>

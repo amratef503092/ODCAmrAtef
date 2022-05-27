@@ -84,7 +84,7 @@ class OnBoardingScreen extends StatelessWidget {
               children: [
                 ElevatedButton(
                     onPressed: () {
-                      Navigator.pushReplacementNamed(context, Routes.registerRoute);
+                      Navigator.pushNamedAndRemoveUntil(context, Routes.registerRoute ,(route) => false,);
                     }, child: const Text(TextManager.joinNow)),
                 CustomButton(
                   function: () {

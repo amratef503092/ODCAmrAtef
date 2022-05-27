@@ -30,6 +30,7 @@ class RegisterCubit extends Cubit<RegisterState> {
     required String phone,
     required String address,
 })async{
+
     await DioHelper.postData(
       endPoint: REGISTER,
       dataPost: {

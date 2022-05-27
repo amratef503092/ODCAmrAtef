@@ -8,9 +8,9 @@ class DioHelper {
   DioHelper(String api){
     dio = Dio();
     dio.options.receiveDataWhenStatusError = true;
-    dio.options.connectTimeout = 5000; //5s
-    dio.options.receiveTimeout = 3000;
-    dio.options.baseUrl =api;
+    dio.options.connectTimeout = 10000; //5s
+    dio.options.receiveTimeout = 10000;
+    dio.options.baseUrl = api;
   }
   static Future<Response?> postData(
       {String ?endPoint, Map <String,dynamic>?dataPost, String token = ''}) async {

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:odc/controller/shared/bloc/cubit_enroll_exam/exam_cubit.dart';
 import 'package:odc/controller/shared/bloc/cubit_home_page/home_page_cubit.dart';
 import 'package:odc/view/constant/design.dart';
 
 import '../../constant/componats.dart';
+import '../../constant/getCacheData.dart';
 import '../../resource/color_manager.dart';
 import '../../resource/route_manager.dart';
 import '../../resource/style_manager.dart';
@@ -26,6 +28,8 @@ class SpecificCategory extends StatelessWidget {
   },
   builder: (context, state) {
     var cubit = HomePageCubit.get(context);
+    var cubitExam = ExamCubit.get(context);
+
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -44,12 +48,18 @@ class SpecificCategory extends StatelessWidget {
                 image: cubit.getCategoryId!.data!.courses![index].imageUrl.toString(),
                 title: cubit.getCategoryId!.data!.courses![index].courseName.toString(),
                 function: (){
-                  cubit.courseScreenDetails(context: context,
+                  cubit.courseScreenDetails(
+                      context: context,
                       image: cubit.getCategoryId!.data!.courses![index].imageUrl.toString(),
                       title:  cubit.getCategoryId!.data!.courses![index].courseName.toString(),
                       level:cubit.getCategoryId!.data!.courses![index].courseLevel.toString(),
                       subTitle:cubit.getCategoryId!.data!.courses![index].admin!.adminName.toString(),
-                      function: (){});
+                      function: (){
+                        cubitExam.enrollCourse(
+                            token: GetCacheData().token,
+                            id:cubit.getCategoryId!.data!.courses![index].id.toString()
+                        );
+                      });
                 },
                 admin: cubit.getCategoryId!.data!.courses![index].admin!.adminName.toString() ,
               );

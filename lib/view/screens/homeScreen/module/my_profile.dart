@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:odc/controller/shared/bloc/cubit_home_page/home_page_cubit.dart';
 import 'package:odc/controller/shared/bloc/cubit_profile/profile_cubit.dart';
-import 'package:odc/controller/shared/shared_prefrance/sheard_perafrance.dart';
 import 'package:odc/view/constant/design.dart';
 import 'package:odc/view/constant/getCacheData.dart';
 import 'package:odc/view/resource/assets_manager.dart';
@@ -20,13 +19,14 @@ class MyProfile extends StatelessWidget {
     var size = MediaQuery.of(context).size;
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-    return BlocConsumer<HomePageCubit, HomePageState>(
+    return BlocConsumer<ProfileCubit, ProfileState>(
   listener: (context, state) {
     // TODO: implement listener
   },
   builder: (context, state) {
 
-    var cubit = HomePageCubit.get(context);
+    var cubit = ProfileCubit.get(context);
+    var cubitHomePage = HomePageCubit.get(context);
 
 
     return Scaffold(
@@ -58,7 +58,8 @@ class MyProfile extends StatelessWidget {
                     width: width*.4,
                     hight: height*.35,
                     function: (){
-                    cubit.logOut(GetCacheData().token ,context);
+                      cubitHomePage.logOut(GetCacheData().token ,context);
+
                     }
                   );
                 },
@@ -68,7 +69,7 @@ class MyProfile extends StatelessWidget {
               ),
             ),
           ]),
-      body: SizedBox(
+      body: (cubit.profile !=null)?SizedBox(
         height: height,
         width: double.infinity,
         child: Padding(
@@ -90,7 +91,7 @@ class MyProfile extends StatelessWidget {
                 height: height * .04,
               ),
               Text(
-                cubit.profile!.data!.student!.studentName.toString(),
+                cubitHomePage.profile!.data!.student!.studentName.toString(),
                 style: getBoldStyle(
                     color: ColorManager.headTextColor, fontSize: AppSize.s28),
               ),
@@ -98,28 +99,29 @@ class MyProfile extends StatelessWidget {
                 height: height * .01,
               ),
               Container(
-                padding: EdgeInsets.all(AppPadding.p14),
+                padding: const EdgeInsets.all(AppPadding.p14),
                 width: width * .5,
                 decoration: BoxDecoration(
                     color: ColorManager.profileEmailBackground,
                     borderRadius: BorderRadius.circular(AppSize.s12)),
                 child: Center(
                     child: Text(
-                        cubit.profile!.data!.student!.email.toString(),
+                      cubit.profile!.data!.student!.email.toString(),
 
-                  style: getBoldStyle(
-                    color: ColorManager.disableTextColor,
-                  ),
-                )),
+                      style: getBoldStyle(
+                        color: ColorManager.disableTextColor,
+                      ),
+                    )),
               ),
               SizedBox(
                 height: height * .02,
               ),
-               Align(
+              Align(
                   alignment: AlignmentDirectional.topStart,
                   child: Text(
                     TextManager.myAchievement,
-                    style: getBoldStyle(color: ColorManager.headTextColor ,fontSize: AppSize.s18),
+                    style: getBoldStyle(color: ColorManager.headTextColor ,
+                        fontSize: AppSize.s18),
                   )),
               SizedBox(
                 height: height * .02,
@@ -129,7 +131,9 @@ class MyProfile extends StatelessWidget {
             ],
           ),
         ),
-      ),
+      ) :const Center(
+        child: CircularProgressIndicator.adaptive(),
+      )
     );
   },
 );
@@ -158,16 +162,14 @@ class Achievement extends StatelessWidget {
           SizedBox(
             width: width * .04,
           ),
-          Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
 
-                Text("Learn UI/UX for beginners" ,style: getBoldStyle(color: ColorManager.headTextColor ,fontSize: AppSize.s18),),
-                Text("Achieved April 21 2022" ,style: getSemiBoldStyle(color: ColorManager.disableTextColor ),)
+              Text("Learn UI/UX for beginners" ,style: getBoldStyle(color: ColorManager.headTextColor ,fontSize: AppSize.s18),),
+              Text("Achieved April 21 2022" ,style: getSemiBoldStyle(color: ColorManager.disableTextColor ),)
 
-              ],
-            ),
+            ],
           )
 
         ],

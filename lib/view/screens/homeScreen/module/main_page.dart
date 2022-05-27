@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:odc/controller/shared/bloc/cubit_enroll_exam/exam_cubit.dart';
 import 'package:odc/controller/shared/bloc/cubit_home_page/home_page_cubit.dart';
 import 'package:odc/view/constant/design.dart';
 import 'package:odc/view/constant/getCacheData.dart';
@@ -23,6 +24,7 @@ class MainPage extends StatelessWidget {
     var size = MediaQuery.of(context).size;
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+    var cubitExam = ExamCubit.get(context);
     return Padding(
       padding: const EdgeInsets.all(AppPadding.p20),
       child: SizedBox(
@@ -40,9 +42,7 @@ class MainPage extends StatelessWidget {
             SizedBox(
               height: height * .04,
             ),
-            // SizedBox(
-            //   height: height*.04,
-            // ),
+
             Container(
               width: width,
               height: height * 0.3,
@@ -83,11 +83,11 @@ class MainPage extends StatelessWidget {
                                 hintText: TextManager.enterCode,
                                 controller: codeController,
                                 color: ColorManager.textFieldMainPageColor,
-                                icon: SizedBox(),
+                                icon: const SizedBox(),
                                 fieldValidator: requireValidator),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                         CircleAvatar(
@@ -95,7 +95,7 @@ class MainPage extends StatelessWidget {
                           backgroundColor: ColorManager.primary,
                           child: IconButton(
                             onPressed: () {},
-                            icon: Icon(
+                            icon:  Icon(
                                 color: ColorManager.whiteColor,
                                 Icons.arrow_forward),
                           ),
@@ -184,7 +184,12 @@ class MainPage extends StatelessWidget {
                                     title: cubit.allCourses!.data![index].courseName.toString(),
                                     level: cubit.allCourses!.data![index].courseLevel.toString(),
                                     subTitle: cubit.allCourses!.data![index].admin!.adminName.toString(),
-                                    function: (){});
+                                    function: (){
+                                      cubitExam.enrollCourse(
+                                        token: GetCacheData().token,
+                                        id: cubit.allCourses!.data![index].id.toString()
+                                      );
+                                    });
                                 // Navigator.pushNamed(context, Routes.couresdetails ,
                                 //     arguments: CourseDetail(
                                 //         function: (){},

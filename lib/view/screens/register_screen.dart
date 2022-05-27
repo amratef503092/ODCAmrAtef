@@ -183,7 +183,7 @@ class RegisterScreen extends StatelessWidget {
                                       offLoading(context);
                                     }
                                   },
-                                  child: const Text("Click")),
+                                  child: const Text(TextManager.SignUp)),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [

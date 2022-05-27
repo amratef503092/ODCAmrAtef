@@ -43,7 +43,9 @@ class TextManager{
   static const String startCourse = "Start Course";
   static const String aboutThisCourse = "About this Course";
   static const String youMayBeInterestedIn = "You may be interested in";
-
+  static const String theCodeHasBeenSent = "The Code has been Sent";
+  static const String next = 'next';
+  static const String SignUp = 'SignUp';
 
 
 

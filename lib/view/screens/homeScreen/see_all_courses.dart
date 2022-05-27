@@ -56,7 +56,9 @@ class SeeAllCourses extends StatelessWidget {
                       function: () {
                         Navigator.pushNamed(context, Routes.couresdetails ,
                         arguments: CourseDetail(
-                          function: (){},
+                          function: (){
+
+                          },
                           image: cubit.allCourses!.data![index].image_url,
                           title: cubit.allCourses!.data![index].courseName,
                           location: 'cairo',

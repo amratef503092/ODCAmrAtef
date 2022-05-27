@@ -1,9 +1,8 @@
-
-import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
 import 'package:flutter/material.dart';
+import 'package:odc/controller/shared/bloc/cubit_enroll_exam/exam_cubit.dart';
+import 'package:odc/controller/shared/bloc/cubit_profile/profile_cubit.dart';
 import 'package:odc/controller/shared/shared_prefrance/sheard_perafrance.dart';
 import 'package:odc/controller/web_service/api.dart';
 import 'package:odc/view/constant/getCacheData.dart';
@@ -13,6 +12,7 @@ import '../../../../model/course_model_by_id.dart';
 import '../../../../model/get_categories_id_Model.dart';
 import '../../../../model/profile.dart';
 import '../../../../view/constant/componats.dart';
+import '../../../../view/constant/design.dart';
 import '../../../../view/resource/route_manager.dart';
 import '../../../../view/screens/homeScreen/module/main_page.dart';
 import '../../../../view/screens/homeScreen/module/my_course.dart';
@@ -129,20 +129,27 @@ class HomePageCubit extends Cubit<HomePageState> {
     });
   }
   Future<void>logOut(String token , BuildContext context) async{
+    onLoading(context);
     await DioHelper.postData(
       token: token,
       endPoint: logout,
     ).then((value)
     {
       CacheHelper.sharedPreferences!.remove('token').then((value) {
-        CacheHelper.sharedPreferences!.remove('refresh_token').then((value) {
-          print(value);
-          Navigator.pushReplacementNamed(context, Routes.loginRoute);
+        CacheHelper.sharedPreferences!.remove('refresh_token').then((value) async {
+          if (kDebugMode) {
+            print(value);
+          }
+
+
+          Navigator.pushNamedAndRemoveUntil(context, Routes.loginRoute ,(route) => false,);
           emit(LogOutSuccessful());
+          offLoading(context);
+
         });
       }).catchError((e){
         emit(LogOutError());
-
+        offLoading(context);
       });
     });
   }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:odc/controller/shared/bloc/cubit_enroll_exam/exam_cubit.dart';
 import 'package:odc/controller/shared/bloc/cubit_login/login_cubit.dart';
 import 'package:odc/controller/shared/bloc/cubit_onBoarding_screen/on_boarding_cubit.dart';
 import 'package:odc/controller/shared/bloc/cubit_regiser/register_cubit.dart';
@@ -65,6 +66,10 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider<ProfileCubit>(
               create: (BuildContext context) =>   ProfileCubit()..getProfileData(),
+
+          ),
+          BlocProvider<ExamCubit>(
+            create: (BuildContext context) =>   ExamCubit(),
 
           ),
 

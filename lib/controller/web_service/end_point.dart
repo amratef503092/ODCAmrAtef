@@ -1,7 +1,7 @@
 const String baseUrl = "https://3ca3-196-205-94-85.eu.ngrok.io";
 const String KEY = "/api/v1/";
 const String  LOGIN = 'login';
-const String REGISTER = 'register';
+const String REGISTER = 'registernew';
 const String FORGETPASSWORD = 'forgetPassword';
 const String verifyOtp = 'verifyOtp';
 const String createNewPassword = 'resetPassword';
