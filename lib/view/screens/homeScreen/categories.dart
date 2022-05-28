@@ -17,6 +17,7 @@ class seeAllPage extends StatelessWidget {
     var size = MediaQuery.of(context).size;
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+    var cubit = HomePageCubit.get(context);
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -25,42 +26,35 @@ class seeAllPage extends StatelessWidget {
           ),
         ),
         body: SizedBox(
-          child: BlocConsumer<HomePageCubit, HomePageState>(
-            listener: (context, state) {
-              // TODO: implement listener
-            },
-            builder: (context, state) {
-              var cubit = HomePageCubit.get(context);
-              return GridView.builder(
-                itemBuilder: (BuildContext context, int index) {
-                  return CategoriesDesign(
-                    title: cubit
-                        .allCategory!.data![index].categoryName
-                        .toString(),
-                    imagePath: cubit
-                        .allCategory!.data![index].imageUrl
-                        .toString(), function: (){
-                    cubit.getAllCategoryId(token: GetCacheData().token,
-                        id: cubit.allCategory!.data![index].id!.toInt()).then((value) {
-                      Navigator.pushNamed(context,Routes.specificCategory);
-
-                    });
-
-
-
-                  },
+          child:  GridView.builder(
+            itemBuilder: (BuildContext context, int index) {
+              return CategoriesDesign(
+                title: cubit
+                    .allCategory!.data![index].categoryName
+                    .toString(),
+                imagePath: cubit
+                    .allCategory!.data![index].imageUrl
+                    .toString(), function: (){
+                cubit.getAllCategoryId(token: GetCacheData().token,
+                    id: cubit.allCategory!.data![index].id.toString()).then((value) {
+                  Navigator.pushNamed(context,Routes.specificCategory , arguments:
+                  cubit.getCategoryId
                   );
-                },
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 20,
-                  childAspectRatio: 0.9 / 0.6,
-                ),
-                itemCount: cubit.allCategory!.data!.length,
+
+                });
+              },
               );
             },
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 20,
+              childAspectRatio: 0.9 / 0.6,
+            ),
+            itemCount: cubit.allCategory!.data!.length,
           ),
-        ));
+          ),
+        );
+
   }
 }

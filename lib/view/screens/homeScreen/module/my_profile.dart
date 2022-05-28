@@ -19,124 +19,114 @@ class MyProfile extends StatelessWidget {
     var size = MediaQuery.of(context).size;
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-    return BlocConsumer<ProfileCubit, ProfileState>(
-  listener: (context, state) {
-    // TODO: implement listener
-  },
-  builder: (context, state) {
-
-    var cubit = ProfileCubit.get(context);
+    // var cubit = ProfileCubit.get(context);
     var cubitHomePage = HomePageCubit.get(context);
-
-
     return Scaffold(
-      appBar: AppBar(
-          titleSpacing: 0,
-          title: Padding(
-            padding: const EdgeInsets.only(left: AppSize.s18),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  TextManager.myProfile,
-                  style: getBoldStyle(
-                      color: ColorManager.primary, fontSize: AppSize.s28),
+        appBar: AppBar(
+            titleSpacing: 0,
+            title: Padding(
+              padding: const EdgeInsets.only(left: AppSize.s18),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    TextManager.myProfile,
+                    style: getBoldStyle(
+                        color: ColorManager.primary, fontSize: AppSize.s28),
+                  ),
+                ],
+              ),
+            ),
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right: AppSize.s18),
+                child: IconButton(
+                  onPressed: ()
+                  {
+
+                    alert(context: context, text: TextManager.textONAlertLogoOut ,
+                        pathImage: ImageAssets.logoutAlert,
+                        title: TextManager.logOut,
+                        width: width*.4,
+                        hight: height*.35,
+                        function: (){
+                          cubitHomePage.logOut(GetCacheData().token ,context);
+
+                        }
+                    );
+                  },
+                  icon: SvgPicture.asset(
+                    ImageAssets.logOut,
+                  ),
                 ),
+              ),
+            ]),
+        body: (cubitHomePage.profile !=null)?SizedBox(
+          height: height,
+          width: double.infinity,
+          child: Padding(
+            padding: const EdgeInsets.all(AppPadding.p20),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: height * 0.04,
+                ),
+                const CircleAvatar(
+                  backgroundColor: ColorManager.primary,
+                  radius: 50,
+                  child: CircleAvatar(
+                    backgroundColor: Colors.black,
+                    radius: 45,
+                  ),
+                ),
+                SizedBox(
+                  height: height * .04,
+                ),
+                Text(
+                  cubitHomePage.profile!.data!.student!.studentName.toString(),
+                  style: getBoldStyle(
+                      color: ColorManager.headTextColor, fontSize: AppSize.s28),
+                ),
+                SizedBox(
+                  height: height * .01,
+                ),
+                Container(
+                  padding: const EdgeInsets.all(AppPadding.p14),
+                  width: width * .5,
+                  decoration: BoxDecoration(
+                      color: ColorManager.profileEmailBackground,
+                      borderRadius: BorderRadius.circular(AppSize.s12)),
+                  child: Center(
+                      child: Text(
+                        cubitHomePage.profile!.data!.student!.email.toString(),
+
+                        style: getBoldStyle(
+                          color: ColorManager.disableTextColor,
+                        ),
+                      )),
+                ),
+                SizedBox(
+                  height: height * .02,
+                ),
+                Align(
+                    alignment: AlignmentDirectional.topStart,
+                    child: Text(
+                      TextManager.myAchievement,
+                      style: getBoldStyle(color: ColorManager.headTextColor ,
+                          fontSize: AppSize.s18),
+                    )),
+                SizedBox(
+                  height: height * .02,
+                ),
+                Achievement(width: width)
+
               ],
             ),
           ),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: AppSize.s18),
-              child: IconButton(
-                onPressed: ()
-                {
-
-                  alert(context: context, text: TextManager.textONAlertLogoOut ,
-                  pathImage: ImageAssets.logoutAlert,
-                    title: TextManager.logOut,
-                    width: width*.4,
-                    hight: height*.35,
-                    function: (){
-                      cubitHomePage.logOut(GetCacheData().token ,context);
-
-                    }
-                  );
-                },
-                icon: SvgPicture.asset(
-                  ImageAssets.logOut,
-                ),
-              ),
-            ),
-          ]),
-      body: (cubit.profile !=null)?SizedBox(
-        height: height,
-        width: double.infinity,
-        child: Padding(
-          padding: const EdgeInsets.all(AppPadding.p20),
-          child: Column(
-            children: [
-              SizedBox(
-                height: height * 0.04,
-              ),
-              const CircleAvatar(
-                backgroundColor: ColorManager.primary,
-                radius: 50,
-                child: CircleAvatar(
-                  backgroundColor: Colors.black,
-                  radius: 45,
-                ),
-              ),
-              SizedBox(
-                height: height * .04,
-              ),
-              Text(
-                cubitHomePage.profile!.data!.student!.studentName.toString(),
-                style: getBoldStyle(
-                    color: ColorManager.headTextColor, fontSize: AppSize.s28),
-              ),
-              SizedBox(
-                height: height * .01,
-              ),
-              Container(
-                padding: const EdgeInsets.all(AppPadding.p14),
-                width: width * .5,
-                decoration: BoxDecoration(
-                    color: ColorManager.profileEmailBackground,
-                    borderRadius: BorderRadius.circular(AppSize.s12)),
-                child: Center(
-                    child: Text(
-                      cubit.profile!.data!.student!.email.toString(),
-
-                      style: getBoldStyle(
-                        color: ColorManager.disableTextColor,
-                      ),
-                    )),
-              ),
-              SizedBox(
-                height: height * .02,
-              ),
-              Align(
-                  alignment: AlignmentDirectional.topStart,
-                  child: Text(
-                    TextManager.myAchievement,
-                    style: getBoldStyle(color: ColorManager.headTextColor ,
-                        fontSize: AppSize.s18),
-                  )),
-              SizedBox(
-                height: height * .02,
-              ),
-              Achievement(width: width)
-
-            ],
-          ),
-        ),
-      ) :const Center(
-        child: CircularProgressIndicator.adaptive(),
-      )
+        ) :const Center(
+          child: CircularProgressIndicator.adaptive(),
+        )
     );
-  },
-);
   }
 }
 

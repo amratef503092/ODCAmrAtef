@@ -40,6 +40,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return MultiBlocProvider(
 
         providers: [
@@ -49,7 +50,6 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider<LoginCubit>(
             create: (BuildContext context) => LoginCubit(),
-
           ),
           BlocProvider<RegisterCubit>(
             create: (BuildContext context) => RegisterCubit(),
@@ -60,14 +60,8 @@ class MyApp extends StatelessWidget {
 
           ),
 
-          BlocProvider<HomePageCubit>(
-            create: (BuildContext context) =>   HomePageCubit()..getAllCategory()..getAllCourses()..getProfileData(GetCacheData().token)
 
-          ),
-          BlocProvider<ProfileCubit>(
-              create: (BuildContext context) =>   ProfileCubit()..getProfileData(),
 
-          ),
           BlocProvider<ExamCubit>(
             create: (BuildContext context) =>   ExamCubit(),
 

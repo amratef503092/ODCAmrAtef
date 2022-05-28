@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 
 
 import '../../../../controller/shared/bloc/cubit_home_page/home_page_cubit.dart';
+import '../../../constant/getCacheData.dart';
 import '../../../resource/assets_manager.dart';
 import '../../../resource/color_manager.dart';
 class HomeScreen extends StatelessWidget {
@@ -38,7 +39,10 @@ class HomeScreen extends StatelessWidget {
   }
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<HomePageCubit,HomePageState>(
+    return BlocProvider<HomePageCubit>(
+  create: (context) =>    HomePageCubit()..getAllCategory()..getAllCourses()..getProfileData(GetCacheData().token)
+      ,
+  child: BlocConsumer<HomePageCubit,HomePageState>(
       listener: (context, state) {
 
       },
@@ -62,6 +66,7 @@ class HomeScreen extends StatelessWidget {
         );
       },
 
-    );
+    ),
+);
   }
 }

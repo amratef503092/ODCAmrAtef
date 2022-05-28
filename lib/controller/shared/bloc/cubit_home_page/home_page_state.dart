@@ -13,7 +13,8 @@ class GetProfileSuccessful extends HomePageState {}
 class GetProfileError extends HomePageState {}
 class LogOutSuccessful extends HomePageState {}
 class LogOutError extends HomePageState {}
-
+class GetCategoriesIDSuccessful extends HomePageState {}
+class GetCategoriesIDError extends HomePageState {}
 
 
 

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -13,6 +14,7 @@ import '../../../constant/componats.dart';
 import '../../../constant/validator.dart';
 import '../../../resource/assets_manager.dart';
 import '../../../resource/value_manager.dart';
+import '../specific _category.dart';
 
 class MainPage extends StatelessWidget {
   MainPage({Key? key}) : super(key: key);
@@ -42,7 +44,6 @@ class MainPage extends StatelessWidget {
             SizedBox(
               height: height * .04,
             ),
-
             Container(
               width: width,
               height: height * 0.3,
@@ -95,7 +96,7 @@ class MainPage extends StatelessWidget {
                           backgroundColor: ColorManager.primary,
                           child: IconButton(
                             onPressed: () {},
-                            icon:  Icon(
+                            icon: Icon(
                                 color: ColorManager.whiteColor,
                                 Icons.arrow_forward),
                           ),
@@ -121,19 +122,27 @@ class MainPage extends StatelessWidget {
                 var cubit = HomePageCubit.get(context);
                 return cubit.allCategory != null
                     ? Padding(
-                      padding: const EdgeInsets.all(AppPadding.p8),
-                      child: SizedBox(
+                        padding: const EdgeInsets.all(AppPadding.p8),
+                        child: SizedBox(
                           height: height * .2,
                           child: ListView.separated(
                               shrinkWrap: true,
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (context, index) {
                                 return CategoriesDesign(
-                                  function: (){
-                                    cubit.getAllCategoryId(token: GetCacheData().token,
-                                        id: cubit.allCategory!.data![index].id!.toInt()).then((value) {
-                                      Navigator.pushNamed(context,Routes.specificCategory);
-
+                                  function: () {
+                                    cubit
+                                        .getAllCategoryId(
+                                            token: GetCacheData().token,
+                                            id: cubit
+                                                .allCategory!.data![index].id
+                                                .toString())
+                                        .then((value) {
+                                      (cubit.getCategoryId);
+                                      Navigator.pushNamed(
+                                          context, Routes.specificCategory ,
+                                      arguments: cubit.getCategoryId
+                                      );
                                     });
                                   },
                                   title: cubit
@@ -145,13 +154,13 @@ class MainPage extends StatelessWidget {
                                 );
                               },
                               separatorBuilder: (context, index) {
-                                return  SizedBox(
-                                  width: width*0.16,
+                                return SizedBox(
+                                  width: width * 0.16,
                                 );
                               },
                               itemCount: 3),
                         ),
-                    )
+                      )
                     : const Center(child: CircularProgressIndicator.adaptive());
               },
             ),
@@ -173,42 +182,58 @@ class MainPage extends StatelessWidget {
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
                               return NewCourseDesign(
-                              title: cubit.allCourses!.data![index].courseName,
-                                  admin:cubit.allCourses!.data![index].admin?.adminName ,
-                                  category:cubit.allCourses!.data![index].category?.categoryName ,
-                                  hours: '14',
-                                  image: cubit.allCourses!.data![index].image_url,
-                                  width: width, height: height, function: (){
-                                cubit.courseScreenDetails(context: context,
-                                    image: cubit.allCourses!.data![index].image_url.toString(),
-                                    title: cubit.allCourses!.data![index].courseName.toString(),
-                                    level: cubit.allCourses!.data![index].courseLevel.toString(),
-                                    subTitle: cubit.allCourses!.data![index].admin!.adminName.toString(),
-                                    function: (){
-                                      cubitExam.enrollCourse(
-                                        token: GetCacheData().token,
-                                        id: cubit.allCourses!.data![index].id.toString()
-                                      );
-                                    });
-                                // Navigator.pushNamed(context, Routes.couresdetails ,
-                                //     arguments: CourseDetail(
-                                //         function: (){},
-                                //         image: cubit.allCourses!.data![index].image_url,
-                                //         title: cubit.allCourses!.data![index].courseName,
-                                //         location: 'cairo',
-                                //         level: cubit.allCourses!.data![index].courseLevel,
-                                //         subTitle: cubit.allCourses!.data![index].admin?.adminName
-                                //
-                                //     )
-                                // );
-                              },);
+                                title:
+                                    cubit.allCourses!.data![index].courseName,
+                                admin: cubit
+                                    .allCourses!.data![index].admin?.adminName,
+                                category: cubit.allCourses!.data![index]
+                                    .category?.categoryName,
+                                hours: '14',
+                                image: cubit.allCourses!.data![index].image_url,
+                                width: width,
+                                height: height,
+                                function: () {
+                                  cubit.courseScreenDetails(
+                                      context: context,
+                                      image: cubit
+                                          .allCourses!.data![index].image_url
+                                          .toString(),
+                                      title: cubit
+                                          .allCourses!.data![index].courseName
+                                          .toString(),
+                                      level: cubit
+                                          .allCourses!.data![index].courseLevel
+                                          .toString(),
+                                      subTitle: cubit.allCourses!.data![index]
+                                          .admin!.adminName
+                                          .toString(),
+                                      function: () {
+                                        cubitExam.enrollCourse(
+                                            token: GetCacheData().token,
+                                            id: cubit
+                                                .allCourses!.data![index].id
+                                                .toString());
+                                      });
+                                  // Navigator.pushNamed(context, Routes.couresdetails ,
+                                  //     arguments: CourseDetail(
+                                  //         function: (){},
+                                  //         image: cubit.allCourses!.data![index].image_url,
+                                  //         title: cubit.allCourses!.data![index].courseName,
+                                  //         location: 'cairo',
+                                  //         level: cubit.allCourses!.data![index].courseLevel,
+                                  //         subTitle: cubit.allCourses!.data![index].admin?.adminName
+                                  //
+                                  //     )
+                                  // );
+                                },
+                              );
                             },
                             separatorBuilder: (context, index) {
                               return const SizedBox(
                                 width: 12,
                               );
                             },
-                            itemCount:3),
+                            itemCount: 3),
                       )
                     : const Center(child: CircularProgressIndicator.adaptive());
               },
@@ -246,4 +271,3 @@ class MainPage extends StatelessWidget {
     );
   }
 }
-

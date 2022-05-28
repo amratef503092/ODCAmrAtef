@@ -31,7 +31,8 @@ class HomePageCubit extends Cubit<HomePageState> {
 
   List<Widget>screen = [
     MainPage(),
-     MyCourse(),
+     const MyCourse(),
+
     const MyProfile(),
   ];
   void changeIndex(int newIndex){
@@ -49,7 +50,9 @@ class HomePageCubit extends Cubit<HomePageState> {
       // });
       emit(GetCategoriesSuccessful());
     }).catchError((error){
-      print(error);
+      if (kDebugMode) {
+        print(error);
+      }
       emit(GetCategoriesError());
 
     });
@@ -64,12 +67,14 @@ class HomePageCubit extends Cubit<HomePageState> {
 
       emit(GetCategoriesSuccessful());
     }).catchError((error){
-      print(error);
+      if (kDebugMode) {
+        print(error);
+      }
       emit(GetCategoriesError());
 
     });
   }
-  Future<void> getAllCategoryId({required String token ,required int id ,
+  Future<void> getAllCategoryId({required String token ,required String id ,
 
   }) async{
     await DioHelper.getData(
@@ -80,9 +85,15 @@ class HomePageCubit extends Cubit<HomePageState> {
         endPoint:'categories/$id/courses'
     ).then((value) {
       getCategoryId = GetCategoryId.fromJson(value!.data);
-      print(getCategoryId!.data!.courses![0].courseName);
+      if (kDebugMode) {
+        print(getCategoryId!.data!.courses![0].courseName);
+      }
+      emit(GetCategoriesIDSuccessful());
+
     }).catchError((e){
       print(e);
+      emit(GetCategoriesIDError());
+
     });
   }
   Future<void> getAllCourseId({required String token ,required int id ,
@@ -118,6 +129,7 @@ class HomePageCubit extends Cubit<HomePageState> {
           id: element.courseId!.toInt(),
           token: token
         ).then((value) {
+
           print(getEnrolled![0].success);
           emit(GetCourseSuccessful());
         }).catchError((e){
@@ -153,6 +165,7 @@ class HomePageCubit extends Cubit<HomePageState> {
       });
     });
   }
+
   void courseScreenDetails({
   required BuildContext context,
     required String  image,
